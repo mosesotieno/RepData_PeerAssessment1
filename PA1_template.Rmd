@@ -129,6 +129,26 @@ activity %>%
 
 ## Imputing missing values
 
+```{r impute_miss}
+
+#--- Impute missing for each day using mean 
+activity_nomissing <-  activity%>% 
+  group_by(date) %>% 
+  mutate(steps = replace(steps,
+                         is.na(steps), mean(steps, na.rm = T)),
+         interval = replace(interval,
+                         is.na(interval), mean(interval, na.rm = T))) %>% ungroup()
+
+#--- For the remaining missing impute for the whole dataset
+activity_nomissing <-  activity_nomissing %>% 
+  mutate(steps = replace(steps,
+                         is.na(steps), mean(steps, na.rm = T))) %>% 
+  select(-avg_steps)
+
+#--- Check both datasets
+summary(activity_nomissing)
+summary(activity)
+```
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
