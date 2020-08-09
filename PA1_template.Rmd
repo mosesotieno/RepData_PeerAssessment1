@@ -56,10 +56,19 @@ ggplot(activity, aes(steps)) + geom_histogram() + theme_bw()
 
 
 
-
-
-
 ## What is mean total number of steps taken per day?
+
+
+```{r histogram1, message=FALSE, fig.height=4, fig.width=5}
+#-- Histogram of total number of steps taken each day
+activity <- activity %>% 
+  group_by(date) %>% 
+  mutate(total_steps = sum(steps))
+
+plot1 <- ggplot(activity, aes(total_steps)) + geom_histogram() + theme_bw()
+plot1 + ggtitle("Histogram of the total number of steps each day") + xlab("Total number of steps") + ylab("Count")
+plot1
+```
 
 
 
