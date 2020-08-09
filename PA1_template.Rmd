@@ -66,7 +66,7 @@ activity <- activity %>%
   mutate(total_steps = sum(steps))
 
 plot1 <- ggplot(activity, aes(total_steps)) + geom_histogram() + theme_bw()
-plot1 + ggtitle("Histogram of the total number of steps each day") + xlab("Total number of steps") + ylab("Count")
+plot1 <- plot1 + ggtitle("Histogram of the total number of steps each day") + xlab("Total number of steps") + ylab("Count")
 plot1
 ```
 
@@ -103,7 +103,6 @@ plot2 <- plot(activity$interval, activity$avg_steps, type = 'l',
               main = "Time series plot of interval and number steps",
               xlab = "Interval",
               ylab = "Average number os steps")
-plot2 
 
 
 ```
@@ -157,7 +156,7 @@ activity_nomissing <- activity_nomissing %>%
   mutate(total_steps = sum(steps))
 
 plot3 <- ggplot(activity_nomissing, aes(total_steps)) + geom_histogram() + theme_bw()
-plot3 + ggtitle("Histogram of the total number of steps each day") + xlab("Total number of steps") + ylab("Count")
+plot3 <- plot3 + ggtitle("Histogram of the total number of steps each day") + xlab("Total number of steps") + ylab("Count")
 plot3
 
 ```
@@ -211,8 +210,19 @@ activity_nomissing %<>%
   mutate(avg_steps = mean(steps))
 
 
-plot4 <- ggplot(activity_nomissing, aes(interval, avg_steps)) + geom_line()+facet_grid(.~type_of_day) + theme_bw()
+plot4 <- ggplot(activity_nomissing, aes(interval, avg_steps)) + geom_line()+facet_grid(.~type_of_day) + theme_bw()+
+  ggtitle("Time series plot of intervals and average number of steps by type of day") + xlab("Inteval") + ylab("Number of steps") 
+      
 plot4
+
+```
+
+On average there are more activities on weekends than  weekdays. 
+```{r save_lots}
+#---- Save all the plots
+ggsave("./figures/histogram1.png", plot1,width = 5, height = 4)
+ggsave("./figures/histogram2.png", plot3,width = 5, height = 4)
+ggsave("./figures/timeseries2.png", plot4,width = 5, height = 4)
 
 ```
 
