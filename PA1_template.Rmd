@@ -151,4 +151,16 @@ summary(activity)
 ```
 
 
+```{r histogram2, fig.height=4, fig.width=5, message=F}
+activity_nomissing <- activity_nomissing %>% 
+  group_by(date) %>% 
+  mutate(total_steps = sum(steps))
+
+plot3 <- ggplot(activity_nomissing, aes(total_steps)) + geom_histogram() + theme_bw()
+plot3 + ggtitle("Histogram of the total number of steps each day") + xlab("Total number of steps") + ylab("Count")
+plot3
+
+```
+
+
 ## Are there differences in activity patterns between weekdays and weekends?
