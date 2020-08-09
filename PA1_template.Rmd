@@ -108,6 +108,25 @@ plot2
 
 ```
 
+
+```{r max_steps, message = F}
+#--- The 5-minute interval that, on average, contains the maximum number of steps
+activity %>% 
+  group_by(date) %>% 
+  mutate(max_steps =max(steps)) %>% 
+  select(interval, max_steps, steps) %>% 
+  filter(!is.na(max_steps)) %>% 
+  arrange(desc(steps)) %>% 
+  distinct(date, max_steps, .keep_all = T) %>% 
+  kable() %>% 
+  kable_styling() %>% 
+  scroll_box(width = "500px", height = "500px")
+
+  
+```
+
+
+
 ## Imputing missing values
 
 
