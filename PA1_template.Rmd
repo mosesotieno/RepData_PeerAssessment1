@@ -3,6 +3,8 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
+author: "Moses Otieno"
+date: "August 9, 2020"
 ---
 
 
