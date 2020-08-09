@@ -163,4 +163,56 @@ plot3
 ```
 
 
+```{r median_steps2, message=FALSE}
+activity_nomissing %>% 
+  group_by(date) %>% 
+  summarise(
+    mean_steps = mean(steps),
+    median_steps = median(steps)
+  ) %>% 
+  kable() %>% 
+  kable_styling() %>% 
+  scroll_box(width = "500px", height = "500px")
+ 
+
+```
+
+These values do not differ from the first values in the first assignment. For example in the first assignment ( __activity__ dataset with missing values), the overallmean of the number of steps is `r mean(activity$steps,na.rm = T)` while the overall mean after the steps is imputed was `r mean(activity_nomissing$steps)`
+
+| Variable |Activity (with missing) | Activity (with no missing) |
+|----------|------------------------|----------------------------|
+|   Steps  | `r mean(activity$steps,na.rm = T)` | `r mean(activity_nomissing$steps,na.rm = T)`|
+|   Interval  | `r mean(activity$interval,na.rm = T)` | `r mean(activity_nomissing$interval,na.rm = T)`|
+
+
 ## Are there differences in activity patterns between weekdays and weekends?
+
+
+
+
+```{r diff_activity}
+#--- Create a new factor variable of the day
+activity_nomissing <- activity_nomissing %>% 
+  mutate(weekday = weekdays(date),
+         type_of_day = ifelse(weekday %in% c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"), "weekday", "weekend"),
+         type_of_day = as.factor(type_of_day))
+  
+
+#--- Confirm that we have classified the weekday correctly
+activity_nomissing %$%
+  table(weekday, type_of_day)
+
+```
+
+
+```{r time_series2,fig.height=4, fig.width=8}
+activity_nomissing %<>% 
+  group_by(weekday) %>% 
+  mutate(avg_steps = mean(steps))
+
+
+plot4 <- ggplot(activity_nomissing, aes(interval, avg_steps)) + geom_line()+facet_grid(.~type_of_day) + theme_bw()
+plot4
+
+```
+
