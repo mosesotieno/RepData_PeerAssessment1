@@ -6,6 +6,22 @@ output:
 ---
 
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE) # set global chunk option
+```
+
+
+```{r libraries, message=FALSE}
+library(tidyverse)      # Tidyverse for data manipulation
+library(lubridate)     # Working with dates
+library(knitr)        # Kniting
+library(kableExtra)   # Printing nice tables
+library(magrittr)     # 
+```
+
+
+
+
 ## Loading and preprocessing the data
 
 
