@@ -71,6 +71,21 @@ plot1
 ```
 
 
+```{r median_steps, message=FALSE}
+#--- Mean and median number of steps taken each day
+activity %>% 
+  group_by(date) %>% 
+  summarise(
+    mean_steps = mean(steps),
+    median_steps = median(steps)
+  ) %>% 
+  kable() %>% 
+  kable_styling() %>% 
+  scroll_box(width = "500px", height = "500px")
+ 
+
+```
+
 
 ## What is the average daily activity pattern?
 
