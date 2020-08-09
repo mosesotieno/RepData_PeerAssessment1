@@ -106,7 +106,7 @@ plot2 <- plot(activity$interval, activity$avg_steps, type = 'l',
 
 
 ```
-
+The average daily activity tend to be uniform across the intervals. However the activity to be higher than 0. 
 
 ```{r max_steps, message = F}
 #--- The 5-minute interval that, on average, contains the maximum number of steps
