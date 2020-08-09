@@ -90,6 +90,23 @@ activity %>%
 ## What is the average daily activity pattern?
 
 
+```{r time-series, message=F}
+#--- Calculate the average number of steps per day
+
+activity <- activity %>% 
+  group_by(date) %>% 
+  mutate(avg_steps = mean(steps))
+#---- Plot the time interval(x axis) and avg_steps(y)
+
+
+plot2 <- plot(activity$interval, activity$avg_steps, type = 'l',
+              main = "Time series plot of interval and number steps",
+              xlab = "Interval",
+              ylab = "Average number os steps")
+plot2 
+
+
+```
 
 ## Imputing missing values
 
