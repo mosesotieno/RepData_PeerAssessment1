@@ -24,6 +24,39 @@ library(magrittr)     #
 
 ## Loading and preprocessing the data
 
+```{r loadpreprocessdata, include=FALSE}
+
+#-- Load the data
+activity <- read_csv("./data/activity.csv")
+
+```
+
+
+```{r processdata, echo=F, fig.height=4, fig.width=5}
+#-- Have a look at raw data
+
+print(activity, n =10)
+View(activity)
+glimpse(activity)   
+dim(activity)
+sample_n(activity, size = 10)
+
+#-- Summary of the dataset
+summary(activity)
+
+#-- Missing values per variable 
+sapply(activity, function(x) sum(is.na(x)))
+
+#-- Simple plots for visualizations 
+
+ggplot(activity, aes(steps)) + geom_histogram() + theme_bw()
+  
+
+```
+
+
+
+
 
 
 ## What is mean total number of steps taken per day?
